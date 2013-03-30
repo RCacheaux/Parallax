@@ -21,6 +21,7 @@
 		88512F3D170762550027CAD4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88512F3A170762550027CAD4 /* Default-568h@2x.png */; };
 		88512F3E170762550027CAD4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 88512F3B170762550027CAD4 /* Default.png */; };
 		88512F3F170762550027CAD4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88512F3C170762550027CAD4 /* Default@2x.png */; };
+		88512F461707638F0027CAD4 /* PXParallaxScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F451707638F0027CAD4 /* PXParallaxScrollViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		88512F3B170762550027CAD4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		88512F3C170762550027CAD4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		88512F401707625F0027CAD4 /* Parallax-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Parallax-Info.plist"; sourceTree = "<group>"; };
+		88512F441707638F0027CAD4 /* PXParallaxScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXParallaxScrollViewController.h; sourceTree = "<group>"; };
+		88512F451707638F0027CAD4 /* PXParallaxScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXParallaxScrollViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +154,7 @@
 		88512F23170761DD0027CAD4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				88512F421707636C0027CAD4 /* UI */,
 				88512F24170761DD0027CAD4 /* PXAppDelegate.h */,
 				88512F25170761DD0027CAD4 /* PXAppDelegate.m */,
 			);
@@ -166,6 +170,15 @@
 				88512F37170762310027CAD4 /* InfoPlist.strings */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		88512F421707636C0027CAD4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				88512F441707638F0027CAD4 /* PXParallaxScrollViewController.h */,
+				88512F451707638F0027CAD4 /* PXParallaxScrollViewController.m */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,6 +293,7 @@
 			files = (
 				88512F28170761DD0027CAD4 /* PXAppDelegate.m in Sources */,
 				88512F29170761DD0027CAD4 /* main.m in Sources */,
+				88512F461707638F0027CAD4 /* PXParallaxScrollViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +468,7 @@
 				88512F1E1707617A0027CAD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		88512F1F1707617A0027CAD4 /* Build configuration list for PBXNativeTarget "ParallaxTests" */ = {
 			isa = XCConfigurationList;
@@ -462,6 +477,7 @@
 				88512F211707617A0027CAD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
