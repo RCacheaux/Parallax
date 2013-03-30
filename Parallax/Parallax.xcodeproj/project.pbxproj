@@ -22,6 +22,7 @@
 		88512F3E170762550027CAD4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 88512F3B170762550027CAD4 /* Default.png */; };
 		88512F3F170762550027CAD4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88512F3C170762550027CAD4 /* Default@2x.png */; };
 		88512F461707638F0027CAD4 /* PXParallaxScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F451707638F0027CAD4 /* PXParallaxScrollViewController.m */; };
+		88512F49170766360027CAD4 /* PXParallaxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F48170766360027CAD4 /* PXParallaxScrollView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		88512F401707625F0027CAD4 /* Parallax-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Parallax-Info.plist"; sourceTree = "<group>"; };
 		88512F441707638F0027CAD4 /* PXParallaxScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXParallaxScrollViewController.h; sourceTree = "<group>"; };
 		88512F451707638F0027CAD4 /* PXParallaxScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXParallaxScrollViewController.m; sourceTree = "<group>"; };
+		88512F47170766360027CAD4 /* PXParallaxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXParallaxScrollView.h; sourceTree = "<group>"; };
+		88512F48170766360027CAD4 /* PXParallaxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXParallaxScrollView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +180,8 @@
 			children = (
 				88512F441707638F0027CAD4 /* PXParallaxScrollViewController.h */,
 				88512F451707638F0027CAD4 /* PXParallaxScrollViewController.m */,
+				88512F47170766360027CAD4 /* PXParallaxScrollView.h */,
+				88512F48170766360027CAD4 /* PXParallaxScrollView.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 				88512F28170761DD0027CAD4 /* PXAppDelegate.m in Sources */,
 				88512F29170761DD0027CAD4 /* main.m in Sources */,
 				88512F461707638F0027CAD4 /* PXParallaxScrollViewController.m in Sources */,
+				88512F49170766360027CAD4 /* PXParallaxScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

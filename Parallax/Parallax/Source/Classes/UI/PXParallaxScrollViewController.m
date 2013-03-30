@@ -1,7 +1,12 @@
 #import "PXParallaxScrollViewController.h"
 
+#import "PXParallaxScrollView.h"
+
+// TODO(rcacheaux):This static value is purely for reference.
+static NSUInteger kNumberOfBanners = 4;
+
 @interface PXParallaxScrollViewController ()
-@property(nonatomic, strong, readonly) UIScrollView *scrollView;
+@property(nonatomic, strong, readonly) PXParallaxScrollView *scrollView;
 @end
 
 @implementation PXParallaxScrollViewController
@@ -14,19 +19,25 @@
 }
 
 - (void)loadView {
-  self.view = [[UIScrollView alloc] init];
+  self.view = [[PXParallaxScrollView alloc] init];
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.scrollView.showsVerticalScrollIndicator = YES;
-  self.scrollView.backgroundColor = [UIColor orangeColor];
+  self.scrollView.backgroundColor = [UIColor lightGrayColor];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  CGSize viewSize = self.scrollView.frame.size;
+  NSLog(@"Hi");
+  CGFloat bannerAndWindowSize = kBannerHeight + kParallaxWindowHeight;
+  self.scrollView.contentSize = CGSizeMake(viewSize.width,
+                                           bannerAndWindowSize * kNumberOfBanners);
 }
 
 - (void)viewWillLayoutSubviews {
   [super viewWillLayoutSubviews];
-  CGSize viewSize = self.scrollView.frame.size;
-  self.scrollView.contentSize = CGSizeMake(viewSize.width, viewSize.height * 2);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,9 +46,9 @@
 
 #pragma mark Properties
 
-- (UIScrollView *)scrollView {
+- (PXParallaxScrollView *)scrollView {
   // TODO(rcacheaux): Checked cast.
-  return (UIScrollView *)self.view;
+  return (PXParallaxScrollView *)self.view;
 }
 
 @end
