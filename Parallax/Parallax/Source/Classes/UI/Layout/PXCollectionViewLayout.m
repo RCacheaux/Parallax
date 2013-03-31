@@ -4,6 +4,7 @@
 @property(nonatomic, assign) CGFloat contentHeight;
 @property(nonatomic, strong) NSMutableArray *parallaxWindowsLayoutAttributes;
 @property(nonatomic, strong) NSMutableArray *bannersLayoutAttributes;
+@property(nonatomic, strong) NSMutableArray *parallaxingWindowIndicies;
 @end
 
 @implementation PXCollectionViewLayout
@@ -18,13 +19,13 @@
       [self.collectionView.dataSource
        numberOfSectionsInCollectionView:self.collectionView];
   for (int i = 0; i < numberOfSections; i++) {
-    [self prepareLayoutForSection:i];
+    [self prepareLayoutForBannerViewInSection:i];
   }
-}
-
-- (void)prepareLayoutForSection:(NSUInteger)section {
-  [self prepareLayoutForBannerViewInSection:section];
-  [self prepareLayoutForParallaxWindowInSection:section];
+  [self updateParallazingWindowIndicies];
+  self.contentHeight = 0.0f;
+  for (int i = 0; i < numberOfSections; i++) {
+    [self prepareLayoutForParallaxWindowInSection:i];
+  }
 }
 
 - (void)prepareLayoutForBannerViewInSection:(NSUInteger)section {
@@ -46,10 +47,16 @@
                                       contentWidth, bannerHeight);
   bannerAttributes.zIndex = 1;
   self.bannersLayoutAttributes[section] = bannerAttributes;
-  self.contentHeight += bannerHeight;
+  self.contentHeight += (bannerHeight + self.parallaxWindowHeight);
 }
 
 - (void)prepareLayoutForParallaxWindowInSection:(NSUInteger)section {
+  id<PXCollectionViewDelegate> delegate =
+      (id<PXCollectionViewDelegate>)self.collectionView.delegate;
+  CGFloat bannerHeight = [delegate collectionView:self.collectionView
+                                             layout:self
+                                  heightForBannerInSection:section];
+  self.contentHeight += bannerHeight;
   CGFloat contentWidth = self.collectionView.frame.size.width;
   CGFloat parallaxWindowHeight = self.parallaxWindowHeight;
   
@@ -62,10 +69,38 @@
   CGFloat centerY = self.contentHeight + (self.parallaxWindowHeight / 2.0f);
   parallaxWindowAttributes.center = CGPointMake(centerX, centerY);
   parallaxWindowAttributes.size = self.collectionView.bounds.size;
-  parallaxWindowAttributes.zIndex = -1;
+  parallaxWindowAttributes.zIndex = -1 * section;
+  
   self.parallaxWindowsLayoutAttributes[section] = parallaxWindowAttributes;
   
   self.contentHeight += parallaxWindowHeight;
+}
+
+// Assuming collection view will always start from the very top.
+// TODO(rcacheaux): Optimize following method.
+- (void)updateParallazingWindowIndicies {
+  CGFloat bottomOfBounds = CGRectGetMaxY(self.collectionView.bounds);
+  CGFloat topOfBounds = CGRectGetMinY(self.collectionView.bounds);
+  
+  NSMutableArray *parallaxingIndicies = [NSMutableArray array];
+  // Look for Parallaxing.
+  for (int i = 0; i < [self.bannersLayoutAttributes count]; i++) {
+    UICollectionViewLayoutAttributes *bannerLayoutAttributes =
+        self.bannersLayoutAttributes[i];
+    CGFloat bottomOfBanner = CGRectGetMaxY(bannerLayoutAttributes.frame);
+    if (bottomOfBanner <= bottomOfBounds) {
+      [parallaxingIndicies addObject:@(i)];
+    }
+  }
+  for (int i = 0; i < [self.bannersLayoutAttributes count]; i++) {
+    UICollectionViewLayoutAttributes *bannerLayoutAttributes =
+        self.bannersLayoutAttributes[i];
+    CGFloat topOfBanner = CGRectGetMinY(bannerLayoutAttributes.frame);
+    if (topOfBanner <= topOfBounds) {
+      [parallaxingIndicies removeObject:@(i - 1)];
+    }
+  }
+  self.parallaxingWindowIndicies = parallaxingIndicies;
 }
 
 - (CGSize)collectionViewContentSize {
@@ -126,6 +161,7 @@
 - (void)clearOutLayoutCalculations {
   self.bannersLayoutAttributes = [NSMutableArray array];
   self.parallaxWindowsLayoutAttributes = [NSMutableArray array];
+  self.parallaxingWindowIndicies = [NSMutableArray array];
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {

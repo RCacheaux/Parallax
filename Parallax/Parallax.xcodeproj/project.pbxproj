@@ -32,6 +32,7 @@
 		88512F631708D17D0027CAD4 /* PXCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F621708D17D0027CAD4 /* PXCollectionViewController.m */; };
 		88512F651708D6170027CAD4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88512F641708D6170027CAD4 /* QuartzCore.framework */; };
 		88512F681708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F671708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.m */; };
+		88512F6A1708EA500027CAD4 /* Stash.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 88512F691708EA500027CAD4 /* Stash.rtf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		88512F641708D6170027CAD4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		88512F661708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXParallaxWindowCollectionViewCell.h; sourceTree = "<group>"; };
 		88512F671708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXParallaxWindowCollectionViewCell.m; sourceTree = "<group>"; };
+		88512F691708EA500027CAD4 /* Stash.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Stash.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 				88512F3B170762550027CAD4 /* Default.png */,
 				88512F3C170762550027CAD4 /* Default@2x.png */,
 				88512F37170762310027CAD4 /* InfoPlist.strings */,
+				88512F691708EA500027CAD4 /* Stash.rtf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				88512F4F1707950F0027CAD4 /* 2.JPG in Resources */,
 				88512F501707950F0027CAD4 /* 3.JPG in Resources */,
 				88512F511707950F0027CAD4 /* 4.JPG in Resources */,
+				88512F6A1708EA500027CAD4 /* Stash.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
