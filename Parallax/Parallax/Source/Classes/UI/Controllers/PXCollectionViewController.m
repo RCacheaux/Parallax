@@ -36,6 +36,7 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
 - (void)loadCollectionView {
   PXCollectionViewLayout *layout = [[PXCollectionViewLayout alloc] init];
   layout.parallaxWindowHeight = 300.0f;
+  layout.parallaxOffset = 50.0f;
   self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                            collectionViewLayout:layout];
   self.collectionView.dataSource = self;

@@ -14,5 +14,6 @@ static NSString * const kPXBannerSupplementaryViewKind = @"PXBanner";
 @interface PXCollectionViewLayout : UICollectionViewLayout
 
 @property(nonatomic, assign) CGFloat parallaxWindowHeight;
+@property(nonatomic, assign) CGFloat parallaxOffset;
 
 @end

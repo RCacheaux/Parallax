@@ -70,11 +70,7 @@
       
       CGRect currentBannerFrame =
           [self frameForBannerViewAtIndex:index size:bannerSize];
-      
-      
-      
-      
-      
+
       CGFloat parallaxWholeHeight =
           (CGRectGetMinY(nextBannerFrame) + self.bounds.size.height) - CGRectGetMaxY(currentBannerFrame);
       CGFloat percentParallax =
