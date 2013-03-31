@@ -44,6 +44,7 @@
                                  indexPathForItem:0 inSection:section]];
   bannerAttributes.frame = CGRectMake(0.0f, self.contentHeight,
                                       contentWidth, bannerHeight);
+  bannerAttributes.zIndex = 1;
   self.bannersLayoutAttributes[section] = bannerAttributes;
   self.contentHeight += bannerHeight;
 }
@@ -57,8 +58,11 @@
   [UICollectionViewLayoutAttributes
    layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:0
                                                             inSection:section]];
-  parallaxWindowAttributes.frame = CGRectMake(0.0f, self.contentHeight,
-                                              contentWidth, self.parallaxWindowHeight);
+  CGFloat centerX = contentWidth / 2.0f;
+  CGFloat centerY = self.contentHeight + (self.parallaxWindowHeight / 2.0f);
+  parallaxWindowAttributes.center = CGPointMake(centerX, centerY);
+  parallaxWindowAttributes.size = self.collectionView.bounds.size;
+  parallaxWindowAttributes.zIndex = -1;
   self.parallaxWindowsLayoutAttributes[section] = parallaxWindowAttributes;
   
   self.contentHeight += parallaxWindowHeight;

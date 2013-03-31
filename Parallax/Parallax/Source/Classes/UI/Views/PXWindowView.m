@@ -8,13 +8,22 @@
 @implementation PXWindowView
 
 - (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // TODO(rcacheaux): Invalidate.
-    }
-    return self;
+  self = [super initWithFrame:frame];
+  if (self) {
+    self.clipsToBounds = YES;
+    _imageView = [self newImageView];
+    [self addSubview:_imageView];
+  }
+  return self;
 }
 
+- (UIImageView *)newImageView {
+  UIImageView *imageView = [[UIImageView alloc] init];
+  imageView.contentMode = UIViewContentModeScaleAspectFill;
+  return imageView;
+}
+
+// TODO(rcacheaux): Clean up, legacy init method.
 - (id)initWithImageNamed:(NSString *)imageNamed {
   self = [super initWithFrame:CGRectZero];
   if (self) {
@@ -25,11 +34,17 @@
   return self;
 }
 
+// TODO(rcacheaux): Clean up, legacy load method.
 - (UIImageView *)newImageViewWithImageNamed:(NSString *)imageNamed {
   UIImage *image = [UIImage imageNamed:imageNamed];
   UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
   imageView.contentMode = UIViewContentModeScaleAspectFill;
   return imageView;
+}
+
+- (void)setImageToImageNamed:(NSString *)imageNamed {
+  UIImage *image = [UIImage imageNamed:imageNamed];
+  self.imageView.image = image;
 }
 
 #pragma mark Layout

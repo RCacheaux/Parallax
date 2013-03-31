@@ -6,5 +6,6 @@
 @property(nonatomic, strong, readonly) UIImageView *imageView;
 
 - (id)initWithImageNamed:(NSString *)imageNamed;
+- (void)setImageToImageNamed:(NSString *)imageNamed;
 
 @end

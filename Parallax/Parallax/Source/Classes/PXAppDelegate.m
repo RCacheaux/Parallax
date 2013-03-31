@@ -24,6 +24,8 @@
       [[PXScrollViewController alloc] init];
   self.window.rootViewController = parallaxViewController;
    */
+  
+  
   PXCollectionViewController *parallaxViewController =
       [[PXCollectionViewController alloc] init];
   self.window.rootViewController = parallaxViewController;

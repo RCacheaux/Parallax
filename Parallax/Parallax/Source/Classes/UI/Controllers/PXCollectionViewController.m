@@ -3,6 +3,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "PXCollectionViewLayout.h"
+#import "PXParallaxWindowCollectionViewCell.h"
+#import "PXWindowView.h"
 
 static NSString * const kPXParallaxWindowCellReuseID = @"PXWindowID";
 static NSString * const kPXBannerReuseID = @"PXBannerID";
@@ -39,7 +41,7 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
   self.collectionView.dataSource = self;
   self.collectionView.delegate = self;
   
-  [self.collectionView registerClass:[UICollectionViewCell class]
+  [self.collectionView registerClass:[PXParallaxWindowCollectionViewCell class]
           forCellWithReuseIdentifier:kPXParallaxWindowCellReuseID];
   [self.collectionView registerClass:[UICollectionViewCell class]
           forSupplementaryViewOfKind:kPXBannerSupplementaryViewKind
@@ -66,10 +68,16 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-  UICollectionViewCell *cell =
+  PXParallaxWindowCollectionViewCell *cell =
       [collectionView dequeueReusableCellWithReuseIdentifier:kPXParallaxWindowCellReuseID
                                                 forIndexPath:indexPath];
   cell.backgroundColor = [UIColor lightGrayColor];
+  cell.windowView.windowBounds = CGRectMake(0.0f,
+                                            0.0f,
+                                            self.collectionView.frame.size.width,
+                                            self.collectionView.frame.size.height);
+  [cell setWindowImageToImageNamed:
+      [NSString stringWithFormat:@"%i.JPG", indexPath.section + 1]];
   return cell;
 }
 
@@ -85,9 +93,9 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
        dequeueReusableSupplementaryViewOfKind:kPXBannerSupplementaryViewKind
                           withReuseIdentifier:kPXBannerReuseID
                                  forIndexPath:indexPath];
-  banner.backgroundColor = [UIColor blueColor];
-  banner.layer.borderColor = [UIColor blackColor].CGColor;
-  banner.layer.borderWidth = 2.0f;
+  banner.backgroundColor = [UIColor whiteColor];
+//  banner.layer.borderColor = [UIColor blackColor].CGColor;
+//  banner.layer.borderWidth = 2.0f;
   return banner;
 }
 
@@ -97,7 +105,7 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
                    layout:(UICollectionViewLayout*)collectionViewLayout
     heightForBannerInSection:(NSInteger)section {
   if (section == 0) {
-    return 700.0f;
+    return 900.0f;
   }
   return 400.0f;
 }

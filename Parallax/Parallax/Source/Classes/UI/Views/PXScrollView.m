@@ -177,6 +177,7 @@
   CGSize imageViewSize = self.bounds.size;
   for (int i = 0; i < [self.windowViews count]; i++) {
     PXWindowView *imageViewContainer = self.windowViews[i];
+    imageViewContainer.windowBounds = self.bounds;
     imageViewContainer.frame = [self frameForImageViewAtIndex:i size:imageViewSize];
     UIImageView *imageView = imageViewContainer.imageView;
     imageView.frame = imageViewContainer.bounds;
