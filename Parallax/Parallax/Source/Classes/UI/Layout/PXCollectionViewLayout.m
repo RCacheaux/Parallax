@@ -50,18 +50,24 @@
   self.contentHeight += (bannerHeight + self.parallaxWindowHeight);
 }
 
-// Parallaxing Magic is here.
 - (void)prepareLayoutForParallaxWindowInSection:(NSUInteger)section {
-  
-  // Window Parallax Layout Attributes.
   UICollectionViewLayoutAttributes *parallaxWindowAttributes =
       [UICollectionViewLayoutAttributes
        layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:0
                                                                 inSection:section]];
-  
-  
   if ([self isParallaxingSection:section]) {
-    UICollectionViewLayoutAttributes *thisWindowsBannerLayoutAttributes =
+    [self configureLayoutAttributesForParallaxingWindowInSection:section
+                                              layoutAttributes:parallaxWindowAttributes];
+  } else {
+    parallaxWindowAttributes.frame = CGRectZero;
+  }
+  self.parallaxWindowsLayoutAttributes[section] = parallaxWindowAttributes;
+}
+
+// Parallaxing Magic is here.
+- (void)configureLayoutAttributesForParallaxingWindowInSection:(NSUInteger)section
+                  layoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes {
+  UICollectionViewLayoutAttributes *thisWindowsBannerLayoutAttributes =
         self.bannersLayoutAttributes[section];
     
     CGFloat bottomOfBounds = CGRectGetMaxY(self.collectionView.bounds);
@@ -96,35 +102,8 @@
     // Apply parallax.
     newImageFrame.origin.y += parallaxCurrentOffset;
     
-    parallaxWindowAttributes.frame = newImageFrame;
-    parallaxWindowAttributes.zIndex = -1 * section;
-  } else {
-    parallaxWindowAttributes.frame = CGRectZero;
-  }
-  self.parallaxWindowsLayoutAttributes[section] = parallaxWindowAttributes;
-  
-  /*
-  id<PXCollectionViewDelegate> delegate =
-      (id<PXCollectionViewDelegate>)self.collectionView.delegate;
-  CGFloat bannerHeight = [delegate collectionView:self.collectionView
-                                             layout:self
-                                  heightForBannerInSection:section];
-  self.contentHeight += bannerHeight;
-  CGFloat contentWidth = self.collectionView.frame.size.width;
-  CGFloat parallaxWindowHeight = self.parallaxWindowHeight;
-  
-  
-  CGFloat centerX = contentWidth / 2.0f;
-  CGFloat centerY = self.contentHeight + (self.parallaxWindowHeight / 2.0f);
-  parallaxWindowAttributes.center = CGPointMake(centerX, centerY);
-  parallaxWindowAttributes.size = self.collectionView.bounds.size;
-  parallaxWindowAttributes.zIndex = -1 * section;
-  
-  self.parallaxWindowsLayoutAttributes[section] = parallaxWindowAttributes;
-  
-  self.contentHeight += parallaxWindowHeight;
-   */
-   
+    layoutAttributes.frame = newImageFrame;
+    layoutAttributes.zIndex = -1 * section;
 }
 
 - (BOOL)isParallaxingSection:(NSUInteger)section {
