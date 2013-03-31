@@ -28,6 +28,9 @@
 		88512F5817088FD60027CAD4 /* PXScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F5417088FD60027CAD4 /* PXScrollViewController.m */; };
 		88512F5917088FD60027CAD4 /* PXScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F5717088FD60027CAD4 /* PXScrollView.m */; };
 		88512F5C17088FF40027CAD4 /* PXWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F5B17088FF40027CAD4 /* PXWindowView.m */; };
+		88512F601708C4210027CAD4 /* PXCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F5F1708C4210027CAD4 /* PXCollectionViewLayout.m */; };
+		88512F631708D17D0027CAD4 /* PXCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F621708D17D0027CAD4 /* PXCollectionViewController.m */; };
+		88512F651708D6170027CAD4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88512F641708D6170027CAD4 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +73,11 @@
 		88512F5717088FD60027CAD4 /* PXScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXScrollView.m; sourceTree = "<group>"; };
 		88512F5A17088FF40027CAD4 /* PXWindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXWindowView.h; sourceTree = "<group>"; };
 		88512F5B17088FF40027CAD4 /* PXWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXWindowView.m; sourceTree = "<group>"; };
+		88512F5E1708C4210027CAD4 /* PXCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCollectionViewLayout.h; sourceTree = "<group>"; };
+		88512F5F1708C4210027CAD4 /* PXCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCollectionViewLayout.m; sourceTree = "<group>"; };
+		88512F611708D17D0027CAD4 /* PXCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCollectionViewController.h; sourceTree = "<group>"; };
+		88512F621708D17D0027CAD4 /* PXCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCollectionViewController.m; sourceTree = "<group>"; };
+		88512F641708D6170027CAD4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88512F651708D6170027CAD4 /* QuartzCore.framework in Frameworks */,
 				88512EEE1707617A0027CAD4 /* UIKit.framework in Frameworks */,
 				88512EF01707617A0027CAD4 /* Foundation.framework in Frameworks */,
 				88512EF21707617A0027CAD4 /* CoreGraphics.framework in Frameworks */,
@@ -118,6 +127,7 @@
 		88512EEC1707617A0027CAD4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				88512F641708D6170027CAD4 /* QuartzCore.framework */,
 				88512EED1707617A0027CAD4 /* UIKit.framework */,
 				88512EEF1707617A0027CAD4 /* Foundation.framework */,
 				88512EF11707617A0027CAD4 /* CoreGraphics.framework */,
@@ -193,6 +203,7 @@
 		88512F421707636C0027CAD4 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				88512F5D1708BAE80027CAD4 /* Layout */,
 				88512F5217088FD60027CAD4 /* Controllers */,
 				88512F5517088FD60027CAD4 /* Views */,
 			);
@@ -204,6 +215,8 @@
 			children = (
 				88512F5317088FD60027CAD4 /* PXScrollViewController.h */,
 				88512F5417088FD60027CAD4 /* PXScrollViewController.m */,
+				88512F611708D17D0027CAD4 /* PXCollectionViewController.h */,
+				88512F621708D17D0027CAD4 /* PXCollectionViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -217,6 +230,15 @@
 				88512F5B17088FF40027CAD4 /* PXWindowView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		88512F5D1708BAE80027CAD4 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				88512F5E1708C4210027CAD4 /* PXCollectionViewLayout.h */,
+				88512F5F1708C4210027CAD4 /* PXCollectionViewLayout.m */,
+			);
+			path = Layout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,6 +360,8 @@
 				88512F5817088FD60027CAD4 /* PXScrollViewController.m in Sources */,
 				88512F5917088FD60027CAD4 /* PXScrollView.m in Sources */,
 				88512F5C17088FF40027CAD4 /* PXWindowView.m in Sources */,
+				88512F601708C4210027CAD4 /* PXCollectionViewLayout.m in Sources */,
+				88512F631708D17D0027CAD4 /* PXCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,6 +1,7 @@
 #import "PXAppDelegate.h"
 
 #import "PXScrollViewController.h"
+#import "PXCollectionViewController.h"
 
 @implementation PXAppDelegate
 
@@ -18,8 +19,13 @@
 }
 
 - (void)loadRootViewController {
+  /*
   PXScrollViewController *parallaxViewController =
       [[PXScrollViewController alloc] init];
+  self.window.rootViewController = parallaxViewController;
+   */
+  PXCollectionViewController *parallaxViewController =
+      [[PXCollectionViewController alloc] init];
   self.window.rootViewController = parallaxViewController;
 }
 
