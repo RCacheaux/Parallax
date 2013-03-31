@@ -21,12 +21,13 @@
 		88512F3D170762550027CAD4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88512F3A170762550027CAD4 /* Default-568h@2x.png */; };
 		88512F3E170762550027CAD4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 88512F3B170762550027CAD4 /* Default.png */; };
 		88512F3F170762550027CAD4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88512F3C170762550027CAD4 /* Default@2x.png */; };
-		88512F461707638F0027CAD4 /* PXParallaxScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F451707638F0027CAD4 /* PXParallaxScrollViewController.m */; };
-		88512F49170766360027CAD4 /* PXParallaxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F48170766360027CAD4 /* PXParallaxScrollView.m */; };
 		88512F4E1707950F0027CAD4 /* 1.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 88512F4A1707950F0027CAD4 /* 1.JPG */; };
 		88512F4F1707950F0027CAD4 /* 2.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 88512F4B1707950F0027CAD4 /* 2.JPG */; };
 		88512F501707950F0027CAD4 /* 3.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 88512F4C1707950F0027CAD4 /* 3.JPG */; };
 		88512F511707950F0027CAD4 /* 4.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 88512F4D1707950F0027CAD4 /* 4.JPG */; };
+		88512F5817088FD60027CAD4 /* PXScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F5417088FD60027CAD4 /* PXScrollViewController.m */; };
+		88512F5917088FD60027CAD4 /* PXScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F5717088FD60027CAD4 /* PXScrollView.m */; };
+		88512F5C17088FF40027CAD4 /* PXWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F5B17088FF40027CAD4 /* PXWindowView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,14 +60,16 @@
 		88512F3B170762550027CAD4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		88512F3C170762550027CAD4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		88512F401707625F0027CAD4 /* Parallax-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Parallax-Info.plist"; sourceTree = "<group>"; };
-		88512F441707638F0027CAD4 /* PXParallaxScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXParallaxScrollViewController.h; sourceTree = "<group>"; };
-		88512F451707638F0027CAD4 /* PXParallaxScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXParallaxScrollViewController.m; sourceTree = "<group>"; };
-		88512F47170766360027CAD4 /* PXParallaxScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXParallaxScrollView.h; sourceTree = "<group>"; };
-		88512F48170766360027CAD4 /* PXParallaxScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXParallaxScrollView.m; sourceTree = "<group>"; };
 		88512F4A1707950F0027CAD4 /* 1.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.JPG; sourceTree = "<group>"; };
 		88512F4B1707950F0027CAD4 /* 2.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.JPG; sourceTree = "<group>"; };
 		88512F4C1707950F0027CAD4 /* 3.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.JPG; sourceTree = "<group>"; };
 		88512F4D1707950F0027CAD4 /* 4.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.JPG; sourceTree = "<group>"; };
+		88512F5317088FD60027CAD4 /* PXScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXScrollViewController.h; sourceTree = "<group>"; };
+		88512F5417088FD60027CAD4 /* PXScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXScrollViewController.m; sourceTree = "<group>"; };
+		88512F5617088FD60027CAD4 /* PXScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXScrollView.h; sourceTree = "<group>"; };
+		88512F5717088FD60027CAD4 /* PXScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXScrollView.m; sourceTree = "<group>"; };
+		88512F5A17088FF40027CAD4 /* PXWindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXWindowView.h; sourceTree = "<group>"; };
+		88512F5B17088FF40027CAD4 /* PXWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXWindowView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,12 +193,30 @@
 		88512F421707636C0027CAD4 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				88512F441707638F0027CAD4 /* PXParallaxScrollViewController.h */,
-				88512F451707638F0027CAD4 /* PXParallaxScrollViewController.m */,
-				88512F47170766360027CAD4 /* PXParallaxScrollView.h */,
-				88512F48170766360027CAD4 /* PXParallaxScrollView.m */,
+				88512F5217088FD60027CAD4 /* Controllers */,
+				88512F5517088FD60027CAD4 /* Views */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		88512F5217088FD60027CAD4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				88512F5317088FD60027CAD4 /* PXScrollViewController.h */,
+				88512F5417088FD60027CAD4 /* PXScrollViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		88512F5517088FD60027CAD4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				88512F5617088FD60027CAD4 /* PXScrollView.h */,
+				88512F5717088FD60027CAD4 /* PXScrollView.m */,
+				88512F5A17088FF40027CAD4 /* PXWindowView.h */,
+				88512F5B17088FF40027CAD4 /* PXWindowView.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,8 +335,9 @@
 			files = (
 				88512F28170761DD0027CAD4 /* PXAppDelegate.m in Sources */,
 				88512F29170761DD0027CAD4 /* main.m in Sources */,
-				88512F461707638F0027CAD4 /* PXParallaxScrollViewController.m in Sources */,
-				88512F49170766360027CAD4 /* PXParallaxScrollView.m in Sources */,
+				88512F5817088FD60027CAD4 /* PXScrollViewController.m in Sources */,
+				88512F5917088FD60027CAD4 /* PXScrollView.m in Sources */,
+				88512F5C17088FF40027CAD4 /* PXWindowView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

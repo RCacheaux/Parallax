@@ -1,16 +1,18 @@
-#import "PXParallaxScrollView.h"
+#import "PXScrollView.h"
 
-@interface PXParallaxScrollView ()
+#import "PXWindowView.h"
+
+@interface PXScrollView ()
 @property(nonatomic, assign) BOOL bannersLaidOut;
 @property(nonatomic, strong) NSArray *bannerViews;
 @property(nonatomic, assign) BOOL imageViewsLaidOut;
-@property(nonatomic, strong) NSArray *imageViews;
+@property(nonatomic, strong) NSArray *windowViews;
 @property(nonatomic, strong) NSMutableArray *parallaxOrigins;
 
 @property(nonatomic, assign) CGFloat parallaxOffset;
 @end
 
-@implementation PXParallaxScrollView
+@implementation PXScrollView
 
 - (id)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
@@ -41,14 +43,14 @@
     CGFloat bottomOfBounds = CGRectGetMaxY(self.bounds);
     NSArray *parallaxingIndicies = [self currentlyParallaxingIndicies];
     
-    for (UIView *imageViewContainer in self.imageViews) {
+    for (PXWindowView *imageViewContainer in self.windowViews) {
       imageViewContainer.frame = CGRectZero;
     }
     
     for (NSNumber *parallaxingIndex in parallaxingIndicies) {
       NSUInteger index = [parallaxingIndex integerValue];
       
-      UIView *imageView = self.imageViews[index];
+      PXWindowView *imageView = self.windowViews[index];
       CGRect newImageFrame = CGRectMake(0.0f,
                                         (bottomOfBounds - self.bounds.size.height),
                                         self.bounds.size.width,
@@ -153,39 +155,19 @@
 #pragma mark Images
 
 - (void)loadImages {
-  UIImage *image4 = [UIImage imageNamed:@"4.JPG"];
-  UIImageView *imageView4 = [[UIImageView alloc] initWithImage:image4];
-  imageView4.contentMode = UIViewContentModeScaleAspectFill;
-  UIView *imageView4Container = [[UIView alloc] init];
-  imageView4Container.clipsToBounds = YES;
-  [imageView4Container addSubview:imageView4];
+  PXWindowView *imageView4Container = [[PXWindowView alloc] initWithImageNamed:@"4.JPG"];
   [self addSubview:imageView4Container];
   
-  UIImage *image3 = [UIImage imageNamed:@"3.JPG"];
-  UIImageView *imageView3 = [[UIImageView alloc] initWithImage:image3];
-  imageView3.contentMode = UIViewContentModeScaleAspectFill;
-  UIView *imageView3Container = [[UIView alloc] init];
-  imageView3Container.clipsToBounds = YES;
-  [imageView3Container addSubview:imageView3];
+  PXWindowView *imageView3Container = [[PXWindowView alloc] initWithImageNamed:@"3.JPG"];
   [self addSubview:imageView3Container];
   
-  UIImage *image2 = [UIImage imageNamed:@"2.JPG"];
-  UIImageView *imageView2 = [[UIImageView alloc] initWithImage:image2];
-  imageView2.contentMode = UIViewContentModeScaleAspectFill;
-  UIView *imageView2Container = [[UIView alloc] init];
-  imageView2Container.clipsToBounds = YES;
-  [imageView2Container addSubview:imageView2];
+  PXWindowView *imageView2Container = [[PXWindowView alloc] initWithImageNamed:@"2.JPG"];
   [self addSubview:imageView2Container];
   
-  UIImage *image1 = [UIImage imageNamed:@"1.JPG"];
-  UIImageView *imageView1 = [[UIImageView alloc] initWithImage:image1];
-  imageView1.contentMode = UIViewContentModeScaleAspectFill;
-  UIView *imageView1Container = [[UIView alloc] init];
-  imageView1Container.clipsToBounds = YES;
-  [imageView1Container addSubview:imageView1];
+  PXWindowView *imageView1Container = [[PXWindowView alloc] initWithImageNamed:@"1.JPG"];
   [self addSubview:imageView1Container];
   
-  self.imageViews = @[imageView1Container,
+  self.windowViews = @[imageView1Container,
                       imageView2Container,
                       imageView3Container,
                       imageView4Container];
@@ -193,10 +175,10 @@
 
 - (void)layoutImageViews {
   CGSize imageViewSize = self.bounds.size;
-  for (int i = 0; i < [self.imageViews count]; i++) {
-    UIView *imageViewContainer = self.imageViews[i];
+  for (int i = 0; i < [self.windowViews count]; i++) {
+    PXWindowView *imageViewContainer = self.windowViews[i];
     imageViewContainer.frame = [self frameForImageViewAtIndex:i size:imageViewSize];
-    UIImageView *imageView = imageViewContainer.subviews[0];
+    UIImageView *imageView = imageViewContainer.imageView;
     imageView.frame = imageViewContainer.bounds;
     
     self.parallaxOrigins[i] = @(imageViewContainer.frame.origin.y);

@@ -3,6 +3,6 @@
 static CGFloat kBannerHeight = 400.0f;
 static CGFloat kParallaxWindowHeight = 300.0f;
 
-@interface PXParallaxScrollView : UIScrollView
+@interface PXScrollView : UIScrollView
 
 @end

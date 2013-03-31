@@ -1,15 +1,15 @@
-#import "PXParallaxScrollViewController.h"
+#import "PXScrollViewController.h"
 
-#import "PXParallaxScrollView.h"
+#import "PXScrollView.h"
 
 // TODO(rcacheaux):This static value is purely for reference.
 static NSUInteger kNumberOfBanners = 4;
 
-@interface PXParallaxScrollViewController ()
-@property(nonatomic, strong, readonly) PXParallaxScrollView *scrollView;
+@interface PXScrollViewController ()
+@property(nonatomic, strong, readonly) PXScrollView *scrollView;
 @end
 
-@implementation PXParallaxScrollViewController
+@implementation PXScrollViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -19,7 +19,7 @@ static NSUInteger kNumberOfBanners = 4;
 }
 
 - (void)loadView {
-  self.view = [[PXParallaxScrollView alloc] init];
+  self.view = [[PXScrollView alloc] init];
 }
 
 - (void)viewDidLoad {
@@ -46,9 +46,9 @@ static NSUInteger kNumberOfBanners = 4;
 
 #pragma mark Properties
 
-- (PXParallaxScrollView *)scrollView {
+- (PXScrollView *)scrollView {
   // TODO(rcacheaux): Checked cast.
-  return (PXParallaxScrollView *)self.view;
+  return (PXScrollView *)self.view;
 }
 
 @end
