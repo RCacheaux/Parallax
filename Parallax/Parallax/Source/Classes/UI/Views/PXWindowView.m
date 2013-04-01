@@ -60,7 +60,11 @@
   // TODO(rcacheaux): Think about caching these calcs.
   // Size.
   CGSize imageViewSize = [self multiplySizeOfRect:self.windowBounds
-                                         byFactor:(self.imageViewScale * 2.0f)];
+                                         byFactor:(self.imageViewScale * 3.0f)];
+  if (imageViewSize.width < self.windowBounds.size.width) {
+    imageViewSize = self.windowBounds.size;
+  }
+  
   self.imageView.frame = CGRectMake(0.0f, 0.0f,
                                     imageViewSize.width, imageViewSize.height);
   // Position.
