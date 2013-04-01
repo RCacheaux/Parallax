@@ -1,6 +1,7 @@
 #import "PXParallaxWindowCollectionViewCell.h"
 
 #import "PXWindowView.h"
+#import "PXCollectionViewLayoutAttributes.h"
 
 @interface PXParallaxWindowCollectionViewCell ()
 @property(nonatomic, strong, readwrite) PXWindowView *windowView;
@@ -24,6 +25,13 @@
 
 - (void)setWindowImageToImageNamed:(NSString *)imageNamed {
   [self.windowView setImageToImageNamed:imageNamed];
+}
+
+- (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes {
+  [super applyLayoutAttributes:layoutAttributes];
+  PXCollectionViewLayoutAttributes *attributes =
+      (PXCollectionViewLayoutAttributes *)layoutAttributes;
+  self.windowView.imageViewScale = attributes.parallaxWindowImageScaleFactor;
 }
 
 #pragma mark Layout

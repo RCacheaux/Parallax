@@ -33,6 +33,7 @@
 		88512F651708D6170027CAD4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88512F641708D6170027CAD4 /* QuartzCore.framework */; };
 		88512F681708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F671708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.m */; };
 		88512F6A1708EA500027CAD4 /* Stash.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 88512F691708EA500027CAD4 /* Stash.rtf */; };
+		88512F6D1709040A0027CAD4 /* PXCollectionViewLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F6C1709040A0027CAD4 /* PXCollectionViewLayoutAttributes.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,8 @@
 		88512F661708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXParallaxWindowCollectionViewCell.h; sourceTree = "<group>"; };
 		88512F671708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXParallaxWindowCollectionViewCell.m; sourceTree = "<group>"; };
 		88512F691708EA500027CAD4 /* Stash.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Stash.rtf; sourceTree = "<group>"; };
+		88512F6B1709040A0027CAD4 /* PXCollectionViewLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCollectionViewLayoutAttributes.h; sourceTree = "<group>"; };
+		88512F6C1709040A0027CAD4 /* PXCollectionViewLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCollectionViewLayoutAttributes.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +248,8 @@
 			children = (
 				88512F5E1708C4210027CAD4 /* PXCollectionViewLayout.h */,
 				88512F5F1708C4210027CAD4 /* PXCollectionViewLayout.m */,
+				88512F6B1709040A0027CAD4 /* PXCollectionViewLayoutAttributes.h */,
+				88512F6C1709040A0027CAD4 /* PXCollectionViewLayoutAttributes.m */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -372,6 +377,7 @@
 				88512F601708C4210027CAD4 /* PXCollectionViewLayout.m in Sources */,
 				88512F631708D17D0027CAD4 /* PXCollectionViewController.m in Sources */,
 				88512F681708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.m in Sources */,
+				88512F6D1709040A0027CAD4 /* PXCollectionViewLayoutAttributes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

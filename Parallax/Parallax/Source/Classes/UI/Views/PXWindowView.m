@@ -11,6 +11,7 @@
   self = [super initWithFrame:frame];
   if (self) {
     self.clipsToBounds = YES;
+    _imageViewScale = 6.0f;
     _imageView = [self newImageView];
     [self addSubview:_imageView];
   }
@@ -58,7 +59,8 @@
   // TODO(rcacheaux): Should this be done only once??
   // TODO(rcacheaux): Think about caching these calcs.
   // Size.
-  CGSize imageViewSize = [self multiplySizeOfRect:self.windowBounds byFactor:2.0f];
+  CGSize imageViewSize = [self multiplySizeOfRect:self.windowBounds
+                                         byFactor:(self.imageViewScale * 2.0f)];
   self.imageView.frame = CGRectMake(0.0f, 0.0f,
                                     imageViewSize.width, imageViewSize.height);
   // Position.
@@ -76,6 +78,13 @@
   CGFloat width = self.windowBounds.size.width * factor;
   CGFloat height = self.windowBounds.size.height * factor;
   return CGSizeMake(width, height);
+}
+
+#pragma mark Properties
+
+- (void)setImageViewScale:(CGFloat)imageViewScale {
+  _imageViewScale = imageViewScale;
+  [self setNeedsLayout];
 }
 
 @end

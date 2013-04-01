@@ -31,11 +31,12 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self loadCollectionView];
+  [self loadCollectionViewPinchGestureRecognizer];
 }
 
 - (void)loadCollectionView {
   PXCollectionViewLayout *layout = [[PXCollectionViewLayout alloc] init];
-  layout.parallaxWindowHeight = 300.0f;
+  layout.parallaxWindowHeight = 500.0f;
   layout.parallaxOffset = 50.0f;
   self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                            collectionViewLayout:layout];
@@ -51,6 +52,13 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
   [self.view addSubview:self.collectionView];
 }
 
+- (void)loadCollectionViewPinchGestureRecognizer {
+  UIPinchGestureRecognizer *pinchGestureRecognizer =
+      [[UIPinchGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleCollectionViewPinch:)];
+  [self.collectionView addGestureRecognizer:pinchGestureRecognizer];
+}
+
 - (void)viewWillLayoutSubviews {
   [super viewWillLayoutSubviews];
   self.collectionView.frame = self.view.bounds;
@@ -58,6 +66,30 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
+}
+
+#pragma mark Interaction
+
+- (void)handleCollectionViewPinch:(UIPinchGestureRecognizer *)pinchGestureRecognizer {
+  PXCollectionViewLayout *layout =
+      (PXCollectionViewLayout *)self.collectionView.collectionViewLayout;
+  if (pinchGestureRecognizer.state == UIGestureRecognizerStateBegan) {
+    CGPoint initialPinchPoint =
+        [pinchGestureRecognizer locationInView:self.collectionView];
+    NSIndexPath* pinchedCellPath =
+        [self.collectionView indexPathForItemAtPoint:initialPinchPoint];
+    layout.pinchedCellPath = pinchedCellPath;
+  } else if (pinchGestureRecognizer.state == UIGestureRecognizerStateChanged) {
+    NSLog(@"Pinch Scale: %f", pinchGestureRecognizer.scale);
+    layout.pinchedCellScale = pinchGestureRecognizer.scale;
+    layout.pinchedCellCenter =
+        [pinchGestureRecognizer locationInView:self.collectionView];
+  } else {
+    [self.collectionView performBatchUpdates:^{
+      layout.pinchedCellPath = nil;
+      layout.pinchedCellScale = 1.0;
+    } completion:nil];
+  }
 }
 
 #pragma mark UICollectionView Datasource
