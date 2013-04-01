@@ -5,6 +5,7 @@
 #import "PXCollectionViewLayout.h"
 #import "PXParallaxWindowCollectionViewCell.h"
 #import "PXWindowView.h"
+#import "PXBannerView.h"
 
 static NSString * const kPXParallaxWindowCellReuseID = @"PXWindowID";
 static NSString * const kPXBannerReuseID = @"PXBannerID";
@@ -43,9 +44,13 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
   self.collectionView.dataSource = self;
   self.collectionView.delegate = self;
   
+  CATransform3D perspective = CATransform3DIdentity;
+  perspective.m34 = -1.0f/800.0f;
+  self.collectionView.layer.sublayerTransform = perspective;
+  
   [self.collectionView registerClass:[PXParallaxWindowCollectionViewCell class]
           forCellWithReuseIdentifier:kPXParallaxWindowCellReuseID];
-  [self.collectionView registerClass:[UICollectionViewCell class]
+  [self.collectionView registerClass:[PXBannerView class]
           forSupplementaryViewOfKind:kPXBannerSupplementaryViewKind
                  withReuseIdentifier:kPXBannerReuseID];
   
@@ -85,10 +90,8 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
     layout.pinchedCellCenter =
         [pinchGestureRecognizer locationInView:self.collectionView];
   } else {
-    [self.collectionView performBatchUpdates:^{
-      layout.pinchedCellPath = nil;
-      layout.pinchedCellScale = 1.0;
-    } completion:nil];
+    layout.pinchedCellPath = nil;
+    layout.pinchedCellScale = 1.0;
   }
 }
 
@@ -110,7 +113,7 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
                                             self.collectionView.frame.size.width,
                                             self.collectionView.frame.size.height);
   [cell setWindowImageToImageNamed:
-      [NSString stringWithFormat:@"%i.JPG", indexPath.section + 1]];
+      [NSString stringWithFormat:@"%i.jpg", indexPath.section]];
   return cell;
 }
 
@@ -121,11 +124,12 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
            viewForSupplementaryElementOfKind:(NSString *)kind
                                  atIndexPath:(NSIndexPath *)indexPath {
-  UICollectionViewCell *banner =
+  PXBannerView *banner =
       [collectionView
        dequeueReusableSupplementaryViewOfKind:kPXBannerSupplementaryViewKind
                           withReuseIdentifier:kPXBannerReuseID
                                  forIndexPath:indexPath];
+  [banner setImageToImageNamed:[NSString stringWithFormat:@"B%i.jpg", indexPath.section]];
   banner.backgroundColor = [UIColor whiteColor];
 //  banner.layer.borderColor = [UIColor blackColor].CGColor;
 //  banner.layer.borderWidth = 2.0f;

@@ -34,6 +34,11 @@
   self.windowView.imageViewScale = attributes.parallaxWindowImageScaleFactor;
 }
 
+- (void)prepareForReuse {
+  [super prepareForReuse];
+  self.windowView.imageView.image = nil;
+}
+
 #pragma mark Layout
 
 - (void)layoutSubviews {

@@ -2,6 +2,8 @@
 
 #import "PXCollectionViewLayoutAttributes.h"
 
+static inline double radians (double degrees) {return degrees * M_PI/180;}
+
 @interface PXCollectionViewLayout ()
 @property(nonatomic, assign) CGFloat contentHeight;
 @property(nonatomic, strong) NSMutableArray *parallaxWindowsLayoutAttributes;
@@ -36,7 +38,6 @@
     [self prepareLayoutForBannerViewInSection:i];
   }
   [self updateParallazingWindowIndicies];
-//  self.contentHeight = 0.0f;
   for (int i = 0; i < numberOfSections; i++) {
     [self prepareLayoutForParallaxWindowInSection:i];
   }
@@ -60,8 +61,24 @@
   bannerAttributes.frame = CGRectMake(0.0f, self.contentHeight,
                                       contentWidth, bannerHeight);
   bannerAttributes.zIndex = 1;
+  [self applyPinchToBannerLayoutAttributes:bannerAttributes];
   self.bannersLayoutAttributes[section] = bannerAttributes;
   self.contentHeight += (bannerHeight + self.parallaxWindowHeight);
+}
+
+-(void)applyPinchToBannerLayoutAttributes:
+    (PXCollectionViewLayoutAttributes*)layoutAttributes {
+//  if (self.pinchedCellPath && self.pinchedCellScale <= 1.0f) {
+    if (layoutAttributes.indexPath.section == self.pinchedCellPath.section) {
+      CGRect bannerFrame = layoutAttributes.frame;
+          layoutAttributes.frame =
+              CGRectOffset(bannerFrame, 0.0f, (-80.0f * (1 - self.pinchedCellScale)));
+    } else if (layoutAttributes.indexPath.section == (self.pinchedCellPath.section + 1)) {
+      CGRect bannerFrame = layoutAttributes.frame;
+      layoutAttributes.frame =
+          CGRectOffset(bannerFrame, 0.0f, (80.0f * (1 - self.pinchedCellScale)));
+    }
+//  }
 }
 
 - (void)prepareLayoutForParallaxWindowInSection:(NSUInteger)section {
@@ -74,19 +91,10 @@
                                               layoutAttributes:parallaxWindowAttributes];
   } else {
     parallaxWindowAttributes.frame = CGRectZero;
-  }
+  }  
   
   [self applyPinchToLayoutAttributes:parallaxWindowAttributes];
   self.parallaxWindowsLayoutAttributes[section] = parallaxWindowAttributes;
-}
-
--(void)applyPinchToLayoutAttributes:(PXCollectionViewLayoutAttributes*)layoutAttributes {
-  if ([layoutAttributes.indexPath isEqual:self.pinchedCellPath]) {
-//    layoutAttributes.transform3D = CATransform3DMakeScale(self.pinchedCellScale, self.pinchedCellScale, 1.0);
-//    layoutAttributes.center = self.pinchedCellCenter;
-//    layoutAttributes.zIndex = 1;
-    layoutAttributes.parallaxWindowImageScaleFactor = self.pinchedCellScale;
-  }
 }
 
 // Parallaxing Magic is here.
@@ -136,6 +144,12 @@
     return YES;
   }
   return NO;
+}
+
+-(void)applyPinchToLayoutAttributes:(PXCollectionViewLayoutAttributes*)layoutAttributes {
+  if ([layoutAttributes.indexPath isEqual:self.pinchedCellPath]) {
+    layoutAttributes.parallaxWindowImageScaleFactor = self.pinchedCellScale;
+  }
 }
 
 // Assuming collection view will always start from the very top.
@@ -198,14 +212,6 @@
   return layoutAttributes;
 }
 
-/*
-- (PXCollectionViewLayoutAttributes *)
-    layoutAttributesForDecorationViewOfKind:(NSString *)decorationViewKind
-                                atIndexPath:(NSIndexPath *)indexPath {
-  return nil;
-}
-*/
-
 - (PXCollectionViewLayoutAttributes *)
     layoutAttributesForSupplementaryViewOfKind:(NSString *)kind
                                    atIndexPath:(NSIndexPath *)indexPath {
@@ -216,7 +222,6 @@
 
 - (void)invalidateLayout {
   [super invalidateLayout];
-  // Trash calculations.
   [self clearOutLayoutCalculations];
 }
 
