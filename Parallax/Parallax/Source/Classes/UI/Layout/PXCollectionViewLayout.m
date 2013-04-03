@@ -149,10 +149,10 @@ static CGFloat kPXCellExpansionBannerOffset = 80.0f;
   
   // Parallax.
   CGRect currentBannerFrame = thisCellsBannerLayoutAttributes.frame;
-  CGFloat nextPossibleBannerXOrigin =
+  CGFloat nextPossibleBannerYOrigin =
       CGRectGetMaxY(currentBannerFrame) + self.parallaxVisibleHeight;
   CGFloat parallaxWholeHeight =
-      (nextPossibleBannerXOrigin + self.collectionView.bounds.size.height);
+      (nextPossibleBannerYOrigin + self.collectionView.bounds.size.height);
   parallaxWholeHeight -= CGRectGetMaxY(currentBannerFrame);
   CGFloat percentParallax =
       (bottomOfBounds - CGRectGetMaxY(currentBannerFrame)) / parallaxWholeHeight;
