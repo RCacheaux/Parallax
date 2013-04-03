@@ -4,7 +4,7 @@
 #import "PXCollectionViewLayoutAttributes.h"
 
 @interface PXCollectionViewCell ()
-@property(nonatomic, strong, readwrite) PXCroppedImageContainerView *windowView;
+@property(nonatomic, strong, readwrite) PXCroppedImageContainerView *imageContainerView;
 @end
 
 @implementation PXCollectionViewCell
@@ -12,38 +12,38 @@
 - (id)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {
-    _windowView = [self newWindowView];
-    [self.contentView addSubview:_windowView];
+    _imageContainerView = [self newCroppedImageContainerView];
+    [self.contentView addSubview:_imageContainerView];
   }
   return self;
 }
 
-- (PXCroppedImageContainerView *)newWindowView {
-  PXCroppedImageContainerView *windowView = [[PXCroppedImageContainerView alloc] init];
-  return windowView;
+- (PXCroppedImageContainerView *)newCroppedImageContainerView {
+  PXCroppedImageContainerView *containerView = [[PXCroppedImageContainerView alloc] init];
+  return containerView;
 }
 
 - (void)setWindowImageToImageNamed:(NSString *)imageNamed {
-  [self.windowView setImageToImageNamed:imageNamed];
+  [self.imageContainerView setImageToImageNamed:imageNamed];
 }
 
 - (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes {
   [super applyLayoutAttributes:layoutAttributes];
   PXCollectionViewLayoutAttributes *attributes =
       (PXCollectionViewLayoutAttributes *)layoutAttributes;
-  self.windowView.imageViewScale = attributes.parallaxWindowImageScaleFactor;
+  self.imageContainerView.imageViewScale = attributes.parallaxWindowImageScaleFactor;
 }
 
 - (void)prepareForReuse {
   [super prepareForReuse];
-  self.windowView.imageView.image = nil;
+  self.imageContainerView.imageView.image = nil;
 }
 
 #pragma mark Layout
 
 - (void)layoutSubviews {
   [super layoutSubviews];
-  self.windowView.frame = self.contentView.bounds;
+  self.imageContainerView.frame = self.contentView.bounds;
 }
 
 @end

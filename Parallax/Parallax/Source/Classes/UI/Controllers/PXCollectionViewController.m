@@ -97,7 +97,7 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
     PXCollectionViewCell *cell = (PXCollectionViewCell *)
         [self.collectionView cellForItemAtIndexPath:layout.pinchedCellPath];
     
-    [cell.windowView animateToImageViewScale:0.0f
+    [cell.imageContainerView animateToImageViewScale:0.0f
                                 withDuration:2.0f
                                   completion:^(BOOL finished){
                                     layout.expandedCellPath = layout.pinchedCellPath;
@@ -121,7 +121,7 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
       [collectionView dequeueReusableCellWithReuseIdentifier:kPXParallaxWindowCellReuseID
                                                 forIndexPath:indexPath];
   cell.backgroundColor = [UIColor lightGrayColor];
-  cell.windowView.referenceFrame = CGRectMake(0.0f,
+  cell.imageContainerView.referenceFrame = CGRectMake(0.0f,
                                             0.0f,
                                             self.collectionView.frame.size.width,
                                             self.collectionView.frame.size.height);

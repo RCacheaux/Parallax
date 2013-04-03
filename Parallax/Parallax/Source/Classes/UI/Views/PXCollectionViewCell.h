@@ -4,7 +4,7 @@
 
 @interface PXCollectionViewCell : UICollectionViewCell
 
-@property(nonatomic, strong, readonly) PXCroppedImageContainerView *windowView;
+@property(nonatomic, strong, readonly) PXCroppedImageContainerView *imageContainerView;
 
 - (void)setWindowImageToImageNamed:(NSString *)imageNamed;
 
