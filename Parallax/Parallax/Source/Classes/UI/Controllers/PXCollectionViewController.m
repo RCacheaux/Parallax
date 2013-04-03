@@ -142,8 +142,9 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
        dequeueReusableSupplementaryViewOfKind:kPXBannerSupplementaryViewKind
                           withReuseIdentifier:kPXBannerReuseID
                                  forIndexPath:indexPath];
+  //@"B1.png"
   [banner setImageToImageNamed:[NSString stringWithFormat:@"B%i.jpg", indexPath.section]];
-  banner.backgroundColor = [UIColor whiteColor];
+  banner.backgroundColor = [UIColor clearColor];
 //  banner.layer.borderColor = [UIColor blackColor].CGColor;
 //  banner.layer.borderWidth = 2.0f;
   return banner;
@@ -157,7 +158,7 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
   if (section == 0) {
     return 900.0f;
   }
-  return 400.0f;
+  return 500.0f;
 }
 
 @end

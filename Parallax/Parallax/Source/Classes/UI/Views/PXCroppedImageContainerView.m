@@ -21,7 +21,7 @@
 
 - (UIImageView *)newImageView {
   UIImageView *imageView = [[UIImageView alloc] init];
-  imageView.contentMode = UIViewContentModeScaleAspectFill;
+  imageView.contentMode = UIViewContentModeScaleAspectFit;
   return imageView;
 }
 

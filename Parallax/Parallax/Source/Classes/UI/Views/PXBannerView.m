@@ -11,10 +11,11 @@
   self = [super initWithFrame:frame];
   if (self) {
     self.clipsToBounds = YES;
+    self.backgroundColor = [UIColor clearColor];
     _imageView = [self newImageView];
     [self addSubview:_imageView];
     _label = [self newLabel];
-    [self addSubview:_label];
+    //[self addSubview:_label];
   }
   return self;
 }
@@ -22,6 +23,7 @@
 - (UIImageView *)newImageView {
   UIImageView *imageView = [[UIImageView alloc] init];
   imageView.contentMode = UIViewContentModeScaleAspectFill;
+  imageView.backgroundColor = [UIColor clearColor];
   return imageView;
 }
 
