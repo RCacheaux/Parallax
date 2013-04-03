@@ -3,8 +3,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "PXCollectionViewLayout.h"
-#import "PXParallaxWindowCollectionViewCell.h"
-#import "PXWindowView.h"
+#import "PXCollectionViewCell.h"
+#import "PXCroppedImageContainerView.h"
 #import "PXBannerView.h"
 
 static NSString * const kPXParallaxWindowCellReuseID = @"PXWindowID";
@@ -48,7 +48,7 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
   perspective.m34 = -1.0f/800.0f;
   self.collectionView.layer.sublayerTransform = perspective;
   
-  [self.collectionView registerClass:[PXParallaxWindowCollectionViewCell class]
+  [self.collectionView registerClass:[PXCollectionViewCell class]
           forCellWithReuseIdentifier:kPXParallaxWindowCellReuseID];
   [self.collectionView registerClass:[PXBannerView class]
           forSupplementaryViewOfKind:kPXBannerSupplementaryViewKind
@@ -90,8 +90,21 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
     layout.pinchedCellCenter =
         [pinchGestureRecognizer locationInView:self.collectionView];
   } else {
-    layout.pinchedCellPath = nil;
-    layout.pinchedCellScale = 1.0;
+    // TODO(rcacheaux): Determine if should expand or contract.
+    // TODO(rcacheaux): Re-center collection view and lock the scroll.
+    
+    pinchGestureRecognizer.enabled = NO;
+    PXCollectionViewCell *cell = (PXCollectionViewCell *)
+        [self.collectionView cellForItemAtIndexPath:layout.pinchedCellPath];
+    
+    [cell.windowView animateToImageViewScale:0.0f
+                                withDuration:2.0f
+                                  completion:^(BOOL finished){
+                                    layout.expandedCellPath = layout.pinchedCellPath;
+                                    layout.pinchedCellScale = 1.0;
+                                    layout.pinchedCellPath = nil;
+                                    pinchGestureRecognizer.enabled = YES;
+                                  }];
   }
 }
 
@@ -104,11 +117,11 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-  PXParallaxWindowCollectionViewCell *cell =
+  PXCollectionViewCell *cell =
       [collectionView dequeueReusableCellWithReuseIdentifier:kPXParallaxWindowCellReuseID
                                                 forIndexPath:indexPath];
   cell.backgroundColor = [UIColor lightGrayColor];
-  cell.windowView.windowBounds = CGRectMake(0.0f,
+  cell.windowView.referenceFrame = CGRectMake(0.0f,
                                             0.0f,
                                             self.collectionView.frame.size.width,
                                             self.collectionView.frame.size.height);

@@ -23,11 +23,11 @@
 		88512F3F170762550027CAD4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88512F3C170762550027CAD4 /* Default@2x.png */; };
 		88512F5817088FD60027CAD4 /* PXScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F5417088FD60027CAD4 /* PXScrollViewController.m */; };
 		88512F5917088FD60027CAD4 /* PXScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F5717088FD60027CAD4 /* PXScrollView.m */; };
-		88512F5C17088FF40027CAD4 /* PXWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F5B17088FF40027CAD4 /* PXWindowView.m */; };
+		88512F5C17088FF40027CAD4 /* PXCroppedImageContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F5B17088FF40027CAD4 /* PXCroppedImageContainerView.m */; };
 		88512F601708C4210027CAD4 /* PXCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F5F1708C4210027CAD4 /* PXCollectionViewLayout.m */; };
 		88512F631708D17D0027CAD4 /* PXCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F621708D17D0027CAD4 /* PXCollectionViewController.m */; };
 		88512F651708D6170027CAD4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88512F641708D6170027CAD4 /* QuartzCore.framework */; };
-		88512F681708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F671708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.m */; };
+		88512F681708D8F50027CAD4 /* PXCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F671708D8F50027CAD4 /* PXCollectionViewCell.m */; };
 		88512F6A1708EA500027CAD4 /* Stash.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 88512F691708EA500027CAD4 /* Stash.rtf */; };
 		88512F6D1709040A0027CAD4 /* PXCollectionViewLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F6C1709040A0027CAD4 /* PXCollectionViewLayoutAttributes.m */; };
 		88512F70170957050027CAD4 /* PXBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88512F6F170957050027CAD4 /* PXBannerView.m */; };
@@ -75,15 +75,15 @@
 		88512F5417088FD60027CAD4 /* PXScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXScrollViewController.m; sourceTree = "<group>"; };
 		88512F5617088FD60027CAD4 /* PXScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXScrollView.h; sourceTree = "<group>"; };
 		88512F5717088FD60027CAD4 /* PXScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXScrollView.m; sourceTree = "<group>"; };
-		88512F5A17088FF40027CAD4 /* PXWindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXWindowView.h; sourceTree = "<group>"; };
-		88512F5B17088FF40027CAD4 /* PXWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXWindowView.m; sourceTree = "<group>"; };
+		88512F5A17088FF40027CAD4 /* PXCroppedImageContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCroppedImageContainerView.h; sourceTree = "<group>"; };
+		88512F5B17088FF40027CAD4 /* PXCroppedImageContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCroppedImageContainerView.m; sourceTree = "<group>"; };
 		88512F5E1708C4210027CAD4 /* PXCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCollectionViewLayout.h; sourceTree = "<group>"; };
 		88512F5F1708C4210027CAD4 /* PXCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCollectionViewLayout.m; sourceTree = "<group>"; };
 		88512F611708D17D0027CAD4 /* PXCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCollectionViewController.h; sourceTree = "<group>"; };
 		88512F621708D17D0027CAD4 /* PXCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCollectionViewController.m; sourceTree = "<group>"; };
 		88512F641708D6170027CAD4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		88512F661708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXParallaxWindowCollectionViewCell.h; sourceTree = "<group>"; };
-		88512F671708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXParallaxWindowCollectionViewCell.m; sourceTree = "<group>"; };
+		88512F661708D8F50027CAD4 /* PXCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCollectionViewCell.h; sourceTree = "<group>"; };
+		88512F671708D8F50027CAD4 /* PXCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCollectionViewCell.m; sourceTree = "<group>"; };
 		88512F691708EA500027CAD4 /* Stash.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Stash.rtf; sourceTree = "<group>"; };
 		88512F6B1709040A0027CAD4 /* PXCollectionViewLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXCollectionViewLayoutAttributes.h; sourceTree = "<group>"; };
 		88512F6C1709040A0027CAD4 /* PXCollectionViewLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXCollectionViewLayoutAttributes.m; sourceTree = "<group>"; };
@@ -250,10 +250,10 @@
 			children = (
 				88512F5617088FD60027CAD4 /* PXScrollView.h */,
 				88512F5717088FD60027CAD4 /* PXScrollView.m */,
-				88512F5A17088FF40027CAD4 /* PXWindowView.h */,
-				88512F5B17088FF40027CAD4 /* PXWindowView.m */,
-				88512F661708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.h */,
-				88512F671708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.m */,
+				88512F5A17088FF40027CAD4 /* PXCroppedImageContainerView.h */,
+				88512F5B17088FF40027CAD4 /* PXCroppedImageContainerView.m */,
+				88512F661708D8F50027CAD4 /* PXCollectionViewCell.h */,
+				88512F671708D8F50027CAD4 /* PXCollectionViewCell.m */,
 				88512F6E170957040027CAD4 /* PXBannerView.h */,
 				88512F6F170957050027CAD4 /* PXBannerView.m */,
 			);
@@ -394,10 +394,10 @@
 				88512F29170761DD0027CAD4 /* main.m in Sources */,
 				88512F5817088FD60027CAD4 /* PXScrollViewController.m in Sources */,
 				88512F5917088FD60027CAD4 /* PXScrollView.m in Sources */,
-				88512F5C17088FF40027CAD4 /* PXWindowView.m in Sources */,
+				88512F5C17088FF40027CAD4 /* PXCroppedImageContainerView.m in Sources */,
 				88512F601708C4210027CAD4 /* PXCollectionViewLayout.m in Sources */,
 				88512F631708D17D0027CAD4 /* PXCollectionViewController.m in Sources */,
-				88512F681708D8F50027CAD4 /* PXParallaxWindowCollectionViewCell.m in Sources */,
+				88512F681708D8F50027CAD4 /* PXCollectionViewCell.m in Sources */,
 				88512F6D1709040A0027CAD4 /* PXCollectionViewLayoutAttributes.m in Sources */,
 				88512F70170957050027CAD4 /* PXBannerView.m in Sources */,
 			);

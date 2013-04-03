@@ -4,6 +4,8 @@
 
 static inline double radians (double degrees) {return degrees * M_PI/180;}
 
+static CGFloat kPXCellExpansionBannerOffset = 80.0f;
+
 @interface PXCollectionViewLayout ()
 @property(nonatomic, assign) CGFloat contentHeight;
 @property(nonatomic, strong) NSMutableArray *parallaxWindowsLayoutAttributes;
@@ -27,6 +29,7 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 
 - (void)prepareLayout {
   [super prepareLayout];
+  
   // TODO(rcacheaux): Check that there is only ONE cell defined in each section.
   // TODO(rcacheaux): Check if attributes have already been calculated.
   [self clearOutLayoutCalculations];
@@ -61,24 +64,40 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
   bannerAttributes.frame = CGRectMake(0.0f, self.contentHeight,
                                       contentWidth, bannerHeight);
   bannerAttributes.zIndex = 1;
-  [self applyPinchToBannerLayoutAttributes:bannerAttributes];
+  
+  if (self.expandedCellPath) {
+    if (section == self.expandedCellPath.section) {
+      bannerAttributes.frame = CGRectOffset(bannerAttributes.frame,
+                                            0.0f,
+                                            -kPXCellExpansionBannerOffset);
+    } else if (section == (self.expandedCellPath.section + 1)) {
+      bannerAttributes.frame = CGRectOffset(bannerAttributes.frame,
+                                            0.0f,
+                                            kPXCellExpansionBannerOffset);
+    }
+  } else {
+    [self applyPinchToBannerLayoutAttributes:bannerAttributes];
+  }
+  
   self.bannersLayoutAttributes[section] = bannerAttributes;
   self.contentHeight += (bannerHeight + self.parallaxWindowHeight);
 }
 
 -(void)applyPinchToBannerLayoutAttributes:
     (PXCollectionViewLayoutAttributes*)layoutAttributes {
-//  if (self.pinchedCellPath && self.pinchedCellScale <= 1.0f) {
     if (layoutAttributes.indexPath.section == self.pinchedCellPath.section) {
       CGRect bannerFrame = layoutAttributes.frame;
           layoutAttributes.frame =
-              CGRectOffset(bannerFrame, 0.0f, (-80.0f * (1 - self.pinchedCellScale)));
+              CGRectOffset(bannerFrame,
+                           0.0f,
+                           (-kPXCellExpansionBannerOffset * (1 - self.pinchedCellScale)));
     } else if (layoutAttributes.indexPath.section == (self.pinchedCellPath.section + 1)) {
       CGRect bannerFrame = layoutAttributes.frame;
       layoutAttributes.frame =
-          CGRectOffset(bannerFrame, 0.0f, (80.0f * (1 - self.pinchedCellScale)));
+          CGRectOffset(bannerFrame,
+                       0.0f,
+                       (kPXCellExpansionBannerOffset * (1 - self.pinchedCellScale)));
     }
-//  }
 }
 
 - (void)prepareLayoutForParallaxWindowInSection:(NSUInteger)section {
@@ -89,6 +108,11 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
   if ([self isParallaxingSection:section]) {
     [self configureLayoutAttributesForParallaxingWindowInSection:section
                                               layoutAttributes:parallaxWindowAttributes];
+    if (self.expandedCellPath) {
+      if ([self.expandedCellPath isEqual:parallaxWindowAttributes.indexPath]) {
+        parallaxWindowAttributes.parallaxWindowImageScaleFactor = 0.0f;
+      }
+    }
   } else {
     parallaxWindowAttributes.frame = CGRectZero;
   }  
@@ -103,40 +127,43 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
   PXCollectionViewLayoutAttributes *thisWindowsBannerLayoutAttributes =
         self.bannersLayoutAttributes[section];
     
-    CGFloat bottomOfBounds = CGRectGetMaxY(self.collectionView.bounds);
-    CGRect newImageFrame = CGRectMake(0.0f,
-                                      (bottomOfBounds - self.collectionView.bounds.size.height),
-                                      self.collectionView.bounds.size.width,
-                                      self.collectionView.bounds.size.height);
-    // If there's a next banner.
-    if (section < [self.bannersLayoutAttributes count] - 1) {
-      PXCollectionViewLayoutAttributes *nextWindowsBannerLayoutAttributes =
-          self.bannersLayoutAttributes[section + 1];
-      CGRect nextBannerFrame = nextWindowsBannerLayoutAttributes.frame;
-      // Crop if necessary.
-      if (CGRectGetMaxY(newImageFrame) > CGRectGetMaxY(nextBannerFrame)) {
-        CGFloat amountToCrop =
-            CGRectGetMaxY(newImageFrame) - CGRectGetMaxY(nextBannerFrame);
-        newImageFrame.size.height -= amountToCrop;
-      }
+  // Anchor.
+  CGFloat bottomOfBounds = CGRectGetMaxY(self.collectionView.bounds);
+  CGRect newImageFrame = CGRectMake(0.0f,
+                                    (bottomOfBounds - self.collectionView.bounds.size.height),
+                                    self.collectionView.bounds.size.width,
+                                    self.collectionView.bounds.size.height);
+  // Crop.
+  // If there's a next banner.
+  if (section < [self.bannersLayoutAttributes count] - 1) {
+    PXCollectionViewLayoutAttributes *nextWindowsBannerLayoutAttributes =
+        self.bannersLayoutAttributes[section + 1];
+    CGRect nextBannerFrame = nextWindowsBannerLayoutAttributes.frame;
+    // Crop if necessary.
+    if (CGRectGetMaxY(newImageFrame) > CGRectGetMaxY(nextBannerFrame)) {
+      CGFloat amountToCrop =
+          CGRectGetMaxY(newImageFrame) - CGRectGetMaxY(nextBannerFrame);
+      newImageFrame.size.height -= amountToCrop;
     }
-    
-    CGRect currentBannerFrame = thisWindowsBannerLayoutAttributes.frame;
-    CGFloat nextPossibleBannerXOrigin =
-        CGRectGetMaxY(currentBannerFrame) + self.parallaxWindowHeight;
-    CGFloat parallaxWholeHeight =
-        (nextPossibleBannerXOrigin + self.collectionView.bounds.size.height);
-    parallaxWholeHeight -= CGRectGetMaxY(currentBannerFrame);
-    CGFloat percentParallax =
-        (bottomOfBounds - CGRectGetMaxY(currentBannerFrame)) / parallaxWholeHeight;
-    CGFloat parallaxRange = self.parallaxOffset * 2;
-    CGFloat parallaxCurrentOffset =
-        self.parallaxOffset - (parallaxRange * percentParallax);
-    // Apply parallax.
-    newImageFrame.origin.y += parallaxCurrentOffset;
-    
-    layoutAttributes.frame = newImageFrame;
-    layoutAttributes.zIndex = -1 * section;
+  }
+  
+  // Parallax.
+  CGRect currentBannerFrame = thisWindowsBannerLayoutAttributes.frame;
+  CGFloat nextPossibleBannerXOrigin =
+      CGRectGetMaxY(currentBannerFrame) + self.parallaxWindowHeight;
+  CGFloat parallaxWholeHeight =
+      (nextPossibleBannerXOrigin + self.collectionView.bounds.size.height);
+  parallaxWholeHeight -= CGRectGetMaxY(currentBannerFrame);
+  CGFloat percentParallax =
+      (bottomOfBounds - CGRectGetMaxY(currentBannerFrame)) / parallaxWholeHeight;
+  CGFloat parallaxRange = self.parallaxOffset * 2;
+  CGFloat parallaxCurrentOffset =
+      self.parallaxOffset - (parallaxRange * percentParallax);
+  // Apply parallax.
+  newImageFrame.origin.y += parallaxCurrentOffset;
+  
+  layoutAttributes.frame = newImageFrame;
+  layoutAttributes.zIndex = -1 * section;
 }
 
 - (BOOL)isParallaxingSection:(NSUInteger)section {

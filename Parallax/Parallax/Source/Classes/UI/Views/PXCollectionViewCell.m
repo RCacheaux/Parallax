@@ -1,13 +1,13 @@
-#import "PXParallaxWindowCollectionViewCell.h"
+#import "PXCollectionViewCell.h"
 
-#import "PXWindowView.h"
+#import "PXCroppedImageContainerView.h"
 #import "PXCollectionViewLayoutAttributes.h"
 
-@interface PXParallaxWindowCollectionViewCell ()
-@property(nonatomic, strong, readwrite) PXWindowView *windowView;
+@interface PXCollectionViewCell ()
+@property(nonatomic, strong, readwrite) PXCroppedImageContainerView *windowView;
 @end
 
-@implementation PXParallaxWindowCollectionViewCell
+@implementation PXCollectionViewCell
 
 - (id)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
@@ -18,8 +18,8 @@
   return self;
 }
 
-- (PXWindowView *)newWindowView {
-  PXWindowView *windowView = [[PXWindowView alloc] init];
+- (PXCroppedImageContainerView *)newWindowView {
+  PXCroppedImageContainerView *windowView = [[PXCroppedImageContainerView alloc] init];
   return windowView;
 }
 

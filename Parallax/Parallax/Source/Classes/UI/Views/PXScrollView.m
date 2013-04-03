@@ -1,6 +1,6 @@
 #import "PXScrollView.h"
 
-#import "PXWindowView.h"
+#import "PXCroppedImageContainerView.h"
 
 @interface PXScrollView ()
 @property(nonatomic, assign) BOOL bannersLaidOut;
@@ -43,14 +43,14 @@
     CGFloat bottomOfBounds = CGRectGetMaxY(self.bounds);
     NSArray *parallaxingIndicies = [self currentlyParallaxingIndicies];
     
-    for (PXWindowView *imageViewContainer in self.windowViews) {
+    for (PXCroppedImageContainerView *imageViewContainer in self.windowViews) {
       imageViewContainer.frame = CGRectZero;
     }
     
     for (NSNumber *parallaxingIndex in parallaxingIndicies) {
       NSUInteger index = [parallaxingIndex integerValue];
       
-      PXWindowView *imageView = self.windowViews[index];
+      PXCroppedImageContainerView *imageView = self.windowViews[index];
       CGRect newImageFrame = CGRectMake(0.0f,
                                         (bottomOfBounds - self.bounds.size.height),
                                         self.bounds.size.width,
@@ -151,16 +151,16 @@
 #pragma mark Images
 
 - (void)loadImages {
-  PXWindowView *imageView4Container = [[PXWindowView alloc] initWithImageNamed:@"4.JPG"];
+  PXCroppedImageContainerView *imageView4Container = [[PXCroppedImageContainerView alloc] initWithImageNamed:@"4.JPG"];
   [self addSubview:imageView4Container];
   
-  PXWindowView *imageView3Container = [[PXWindowView alloc] initWithImageNamed:@"3.JPG"];
+  PXCroppedImageContainerView *imageView3Container = [[PXCroppedImageContainerView alloc] initWithImageNamed:@"3.JPG"];
   [self addSubview:imageView3Container];
   
-  PXWindowView *imageView2Container = [[PXWindowView alloc] initWithImageNamed:@"2.JPG"];
+  PXCroppedImageContainerView *imageView2Container = [[PXCroppedImageContainerView alloc] initWithImageNamed:@"2.JPG"];
   [self addSubview:imageView2Container];
   
-  PXWindowView *imageView1Container = [[PXWindowView alloc] initWithImageNamed:@"1.JPG"];
+  PXCroppedImageContainerView *imageView1Container = [[PXCroppedImageContainerView alloc] initWithImageNamed:@"1.JPG"];
   [self addSubview:imageView1Container];
   
   self.windowViews = @[imageView1Container,
@@ -172,8 +172,8 @@
 - (void)layoutImageViews {
   CGSize imageViewSize = self.bounds.size;
   for (int i = 0; i < [self.windowViews count]; i++) {
-    PXWindowView *imageViewContainer = self.windowViews[i];
-    imageViewContainer.windowBounds = self.bounds;
+    PXCroppedImageContainerView *imageViewContainer = self.windowViews[i];
+    imageViewContainer.referenceFrame = self.bounds;
     imageViewContainer.frame = [self frameForImageViewAtIndex:i size:imageViewSize];
     UIImageView *imageView = imageViewContainer.imageView;
     imageView.frame = imageViewContainer.bounds;

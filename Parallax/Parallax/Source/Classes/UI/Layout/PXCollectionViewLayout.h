@@ -18,5 +18,6 @@ static NSString * const kPXBannerSupplementaryViewKind = @"PXBanner";
 @property(nonatomic, copy) NSIndexPath *pinchedCellPath;
 @property(nonatomic, assign) CGFloat pinchedCellScale;
 @property(nonatomic, assign) CGPoint pinchedCellCenter;
+@property(nonatomic, copy) NSIndexPath *expandedCellPath;
 
 @end
