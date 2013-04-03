@@ -6,6 +6,6 @@
 
 @property(nonatomic, strong, readonly) PXCroppedImageContainerView *imageContainerView;
 
-- (void)setWindowImageToImageNamed:(NSString *)imageNamed;
+- (void)setImageToImageNamed:(NSString *)imageNamed;
 
 @end

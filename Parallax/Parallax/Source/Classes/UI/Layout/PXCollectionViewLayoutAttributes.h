@@ -2,6 +2,6 @@
 
 @interface PXCollectionViewLayoutAttributes : UICollectionViewLayoutAttributes
 
-@property(nonatomic, assign) CGFloat parallaxWindowImageScaleFactor;
+@property(nonatomic, assign) CGFloat parallaxImageScaleFactor;
 
 @end

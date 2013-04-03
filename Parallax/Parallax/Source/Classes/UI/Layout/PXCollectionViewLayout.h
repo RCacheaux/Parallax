@@ -13,7 +13,7 @@ static NSString * const kPXBannerSupplementaryViewKind = @"PXBanner";
 
 @interface PXCollectionViewLayout : UICollectionViewLayout
 
-@property(nonatomic, assign) CGFloat parallaxWindowHeight;
+@property(nonatomic, assign) CGFloat parallaxVisibleHeight;
 @property(nonatomic, assign) CGFloat parallaxOffset;
 @property(nonatomic, copy) NSIndexPath *pinchedCellPath;
 @property(nonatomic, assign) CGFloat pinchedCellScale;

@@ -8,9 +8,9 @@ static CGFloat kPXCellExpansionBannerOffset = 80.0f;
 
 @interface PXCollectionViewLayout ()
 @property(nonatomic, assign) CGFloat contentHeight;
-@property(nonatomic, strong) NSMutableArray *parallaxWindowsLayoutAttributes;
+@property(nonatomic, strong) NSMutableArray *parallaxCellsLayoutAttributes;
 @property(nonatomic, strong) NSMutableArray *bannersLayoutAttributes;
-@property(nonatomic, strong) NSMutableArray *parallaxingWindowIndicies;
+@property(nonatomic, strong) NSMutableArray *parallaxingCellIndicies;
 @end
 
 @implementation PXCollectionViewLayout
@@ -40,9 +40,9 @@ static CGFloat kPXCellExpansionBannerOffset = 80.0f;
   for (int i = 0; i < numberOfSections; i++) {
     [self prepareLayoutForBannerViewInSection:i];
   }
-  [self updateParallazingWindowIndicies];
+  [self updateParallaxingCellIndicies];
   for (int i = 0; i < numberOfSections; i++) {
-    [self prepareLayoutForParallaxWindowInSection:i];
+    [self prepareLayoutForParallaxCellInSection:i];
   }
 }
 
@@ -80,7 +80,7 @@ static CGFloat kPXCellExpansionBannerOffset = 80.0f;
   }
   
   self.bannersLayoutAttributes[section] = bannerAttributes;
-  self.contentHeight += (bannerHeight + self.parallaxWindowHeight);
+  self.contentHeight += (bannerHeight + self.parallaxVisibleHeight);
 }
 
 -(void)applyPinchToBannerLayoutAttributes:
@@ -100,33 +100,33 @@ static CGFloat kPXCellExpansionBannerOffset = 80.0f;
     }
 }
 
-- (void)prepareLayoutForParallaxWindowInSection:(NSUInteger)section {
-  PXCollectionViewLayoutAttributes *parallaxWindowAttributes =
+- (void)prepareLayoutForParallaxCellInSection:(NSUInteger)section {
+  PXCollectionViewLayoutAttributes *parallaxCellAttributes =
       [PXCollectionViewLayoutAttributes
        layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:0
                                                                 inSection:section]];
   if ([self isParallaxingSection:section]) {
-    [self configureLayoutAttributesForParallaxingWindowInSection:section
-                                              layoutAttributes:parallaxWindowAttributes];
+    [self configureLayoutAttributesForParallaxingCellInSection:section
+                                              layoutAttributes:parallaxCellAttributes];
     if (self.expandedCellPath) {
-      if ([self.expandedCellPath isEqual:parallaxWindowAttributes.indexPath]) {
-        parallaxWindowAttributes.parallaxWindowImageScaleFactor = 0.0f;
+      if ([self.expandedCellPath isEqual:parallaxCellAttributes.indexPath]) {
+        parallaxCellAttributes.parallaxImageScaleFactor = 0.0f;
       }
     }
   } else {
-    parallaxWindowAttributes.frame = CGRectZero;
+    parallaxCellAttributes.frame = CGRectZero;
   }  
   
-  [self applyPinchToLayoutAttributes:parallaxWindowAttributes];
-  self.parallaxWindowsLayoutAttributes[section] = parallaxWindowAttributes;
+  [self applyPinchToLayoutAttributes:parallaxCellAttributes];
+  self.parallaxCellsLayoutAttributes[section] = parallaxCellAttributes;
 }
 
 // Parallaxing Magic is here.
-- (void)configureLayoutAttributesForParallaxingWindowInSection:(NSUInteger)section
+- (void)configureLayoutAttributesForParallaxingCellInSection:(NSUInteger)section
                   layoutAttributes:(PXCollectionViewLayoutAttributes *)layoutAttributes {
-  PXCollectionViewLayoutAttributes *thisWindowsBannerLayoutAttributes =
+  PXCollectionViewLayoutAttributes *thisCellsBannerLayoutAttributes =
         self.bannersLayoutAttributes[section];
-    
+  
   // Anchor.
   CGFloat bottomOfBounds = CGRectGetMaxY(self.collectionView.bounds);
   CGRect newImageFrame = CGRectMake(0.0f,
@@ -136,9 +136,9 @@ static CGFloat kPXCellExpansionBannerOffset = 80.0f;
   // Crop.
   // If there's a next banner.
   if (section < [self.bannersLayoutAttributes count] - 1) {
-    PXCollectionViewLayoutAttributes *nextWindowsBannerLayoutAttributes =
+    PXCollectionViewLayoutAttributes *nextCellsBannerLayoutAttributes =
         self.bannersLayoutAttributes[section + 1];
-    CGRect nextBannerFrame = nextWindowsBannerLayoutAttributes.frame;
+    CGRect nextBannerFrame = nextCellsBannerLayoutAttributes.frame;
     // Crop if necessary.
     if (CGRectGetMaxY(newImageFrame) > CGRectGetMaxY(nextBannerFrame)) {
       CGFloat amountToCrop =
@@ -148,9 +148,9 @@ static CGFloat kPXCellExpansionBannerOffset = 80.0f;
   }
   
   // Parallax.
-  CGRect currentBannerFrame = thisWindowsBannerLayoutAttributes.frame;
+  CGRect currentBannerFrame = thisCellsBannerLayoutAttributes.frame;
   CGFloat nextPossibleBannerXOrigin =
-      CGRectGetMaxY(currentBannerFrame) + self.parallaxWindowHeight;
+      CGRectGetMaxY(currentBannerFrame) + self.parallaxVisibleHeight;
   CGFloat parallaxWholeHeight =
       (nextPossibleBannerXOrigin + self.collectionView.bounds.size.height);
   parallaxWholeHeight -= CGRectGetMaxY(currentBannerFrame);
@@ -167,7 +167,7 @@ static CGFloat kPXCellExpansionBannerOffset = 80.0f;
 }
 
 - (BOOL)isParallaxingSection:(NSUInteger)section {
-  if ([self.parallaxingWindowIndicies containsObject:@(section)]) {
+  if ([self.parallaxingCellIndicies containsObject:@(section)]) {
     return YES;
   }
   return NO;
@@ -175,13 +175,13 @@ static CGFloat kPXCellExpansionBannerOffset = 80.0f;
 
 -(void)applyPinchToLayoutAttributes:(PXCollectionViewLayoutAttributes*)layoutAttributes {
   if ([layoutAttributes.indexPath isEqual:self.pinchedCellPath]) {
-    layoutAttributes.parallaxWindowImageScaleFactor = self.pinchedCellScale;
+    layoutAttributes.parallaxImageScaleFactor = self.pinchedCellScale;
   }
 }
 
 // Assuming collection view will always start from the very top.
 // TODO(rcacheaux): Optimize following method.
-- (void)updateParallazingWindowIndicies {
+- (void)updateParallaxingCellIndicies {
   CGFloat bottomOfBounds = CGRectGetMaxY(self.collectionView.bounds);
   CGFloat topOfBounds = CGRectGetMinY(self.collectionView.bounds);
   
@@ -203,7 +203,7 @@ static CGFloat kPXCellExpansionBannerOffset = 80.0f;
       [parallaxingIndicies removeObject:@(i - 1)];
     }
   }
-  self.parallaxingWindowIndicies = parallaxingIndicies;
+  self.parallaxingCellIndicies = parallaxingIndicies;
 }
 
 - (CGSize)collectionViewContentSize {
@@ -212,9 +212,9 @@ static CGFloat kPXCellExpansionBannerOffset = 80.0f;
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
   NSMutableArray *layoutAttributesInRect = [NSMutableArray array];
-  // Parallax Windows.
+  // Parallax Cells.
   for (PXCollectionViewLayoutAttributes *layoutAttributes in
-       self.parallaxWindowsLayoutAttributes) {
+       self.parallaxCellsLayoutAttributes) {
     if (CGRectIntersectsRect(layoutAttributes.frame, rect)) {
       [layoutAttributesInRect addObject:layoutAttributes];
     }
@@ -235,7 +235,7 @@ static CGFloat kPXCellExpansionBannerOffset = 80.0f;
            @"This layout does not support sections with more than one cell.");
   
   PXCollectionViewLayoutAttributes *layoutAttributes =
-      self.parallaxWindowsLayoutAttributes[indexPath.section];
+      self.parallaxCellsLayoutAttributes[indexPath.section];
   return layoutAttributes;
 }
 
@@ -254,8 +254,8 @@ static CGFloat kPXCellExpansionBannerOffset = 80.0f;
 
 - (void)clearOutLayoutCalculations {
   self.bannersLayoutAttributes = [NSMutableArray array];
-  self.parallaxWindowsLayoutAttributes = [NSMutableArray array];
-  self.parallaxingWindowIndicies = [NSMutableArray array];
+  self.parallaxCellsLayoutAttributes = [NSMutableArray array];
+  self.parallaxingCellIndicies = [NSMutableArray array];
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
@@ -264,8 +264,8 @@ static CGFloat kPXCellExpansionBannerOffset = 80.0f;
 
 #pragma mark Properties
 
-- (void)setParallaxWindowHeight:(CGFloat)parallaxWindowHeight {
-  _parallaxWindowHeight = parallaxWindowHeight;
+- (void)setParallaxVisibleHeight:(CGFloat)parallaxVisibleHeight {
+  _parallaxVisibleHeight = parallaxVisibleHeight;
   [self invalidateLayout];
 }
 

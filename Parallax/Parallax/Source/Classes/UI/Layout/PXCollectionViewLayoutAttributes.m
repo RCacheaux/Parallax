@@ -5,14 +5,14 @@
 - (id)init {
   self = [super init];
   if (self) {
-    _parallaxWindowImageScaleFactor = 1.0f;
+    _parallaxImageScaleFactor = 1.0f;
   }
   return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone {
   PXCollectionViewLayoutAttributes *layoutAttributes = [super copyWithZone:zone];
-  layoutAttributes.parallaxWindowImageScaleFactor = self.parallaxWindowImageScaleFactor;
+  layoutAttributes.parallaxImageScaleFactor = self.parallaxImageScaleFactor;
   return layoutAttributes;
 }
 

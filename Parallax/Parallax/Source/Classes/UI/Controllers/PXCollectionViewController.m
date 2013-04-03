@@ -7,7 +7,7 @@
 #import "PXCroppedImageContainerView.h"
 #import "PXBannerView.h"
 
-static NSString * const kPXParallaxWindowCellReuseID = @"PXWindowID";
+static NSString * const kPXParallaxCellReuseID = @"PXCellID";
 static NSString * const kPXBannerReuseID = @"PXBannerID";
 
 @interface PXCollectionViewController ()<UICollectionViewDataSource,
@@ -37,7 +37,7 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
 
 - (void)loadCollectionView {
   PXCollectionViewLayout *layout = [[PXCollectionViewLayout alloc] init];
-  layout.parallaxWindowHeight = 500.0f;
+  layout.parallaxVisibleHeight = 500.0f;
   layout.parallaxOffset = 50.0f;
   self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                            collectionViewLayout:layout];
@@ -49,7 +49,7 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
   self.collectionView.layer.sublayerTransform = perspective;
   
   [self.collectionView registerClass:[PXCollectionViewCell class]
-          forCellWithReuseIdentifier:kPXParallaxWindowCellReuseID];
+          forCellWithReuseIdentifier:kPXParallaxCellReuseID];
   [self.collectionView registerClass:[PXBannerView class]
           forSupplementaryViewOfKind:kPXBannerSupplementaryViewKind
                  withReuseIdentifier:kPXBannerReuseID];
@@ -118,14 +118,14 @@ static NSString * const kPXBannerReuseID = @"PXBannerID";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
   PXCollectionViewCell *cell =
-      [collectionView dequeueReusableCellWithReuseIdentifier:kPXParallaxWindowCellReuseID
+      [collectionView dequeueReusableCellWithReuseIdentifier:kPXParallaxCellReuseID
                                                 forIndexPath:indexPath];
   cell.backgroundColor = [UIColor lightGrayColor];
   cell.imageContainerView.referenceFrame = CGRectMake(0.0f,
                                             0.0f,
                                             self.collectionView.frame.size.width,
                                             self.collectionView.frame.size.height);
-  [cell setWindowImageToImageNamed:
+  [cell setImageToImageNamed:
       [NSString stringWithFormat:@"%i.jpg", indexPath.section]];
   return cell;
 }

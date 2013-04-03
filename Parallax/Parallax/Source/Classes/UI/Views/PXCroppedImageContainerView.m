@@ -1,7 +1,6 @@
 #import "PXCroppedImageContainerView.h"
 
 @interface PXCroppedImageContainerView ()
-//@property(nonatomic, assign, readwrite) CGRect windowBounds;
 @property(nonatomic, strong, readwrite) UIImageView *imageView;
 @property(nonatomic, assign) BOOL animating;
 @end

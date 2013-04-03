@@ -23,7 +23,7 @@
   return containerView;
 }
 
-- (void)setWindowImageToImageNamed:(NSString *)imageNamed {
+- (void)setImageToImageNamed:(NSString *)imageNamed {
   [self.imageContainerView setImageToImageNamed:imageNamed];
 }
 
@@ -31,7 +31,7 @@
   [super applyLayoutAttributes:layoutAttributes];
   PXCollectionViewLayoutAttributes *attributes =
       (PXCollectionViewLayoutAttributes *)layoutAttributes;
-  self.imageContainerView.imageViewScale = attributes.parallaxWindowImageScaleFactor;
+  self.imageContainerView.imageViewScale = attributes.parallaxImageScaleFactor;
 }
 
 - (void)prepareForReuse {
