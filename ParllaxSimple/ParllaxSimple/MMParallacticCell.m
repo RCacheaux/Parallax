@@ -29,4 +29,9 @@
   }
 }
 
+- (void)prepareForReuse {
+  [super prepareForReuse];
+  self.dimmingView.alpha = 0.0f;
+}
+
 @end
